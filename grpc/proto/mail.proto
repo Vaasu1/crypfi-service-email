@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package mail;
+message SendOtp {
+    string otp = 1;
+    string type = 2;
+    string service = 3;
+    string username = 4;
+}
+
+message OtpSentStatus {
+    string status = 1;
+    string message = 2;
+    string otp = 3;
+}
+
+message ValidateOtp {
+    string otp = 1;
+    string username = 2;
+    string service = 3;
+}
+message DeleteOtp {
+    string username = 1;
+    string service = 2;
+}
+message OtpStatus{
+   string status = 1;
+   string message = 2; 
+}
+message SendNotification {
+    string content = 1;
+    string type = 2;
+    string service = 3;
+    string username = 4;
+}
+message NotificationSentStatus {
+    string status = 1;
+    string message = 2;
+}
+message welcomMessage {
+    string username = 1;
+    string email = 2;
+    string service  = 3;
+}
+service OtpService{
+    rpc requestForOtp(SendOtp) returns (OtpSentStatus) {};
+    rpc requestForValidateOtp(ValidateOtp) returns (OtpStatus) {};
+    rpc sendNotification(SendNotification) returns (NotificationSentStatus) {};
+    rpc requestForDeleteOtp(DeleteOtp) returns (OtpStatus) {};
+    rpc sendMail(welcomMessage) returns (OtpStatus) {};
+
+}
